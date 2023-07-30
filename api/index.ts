@@ -7,7 +7,7 @@ import {
 } from "@/types/types";
 import { calculateAge } from "@/utils";
 
-const baseUrl = "http://localhost:8080";
+const baseUrl = "https://gifty-5tpp.onrender.com";
 const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dhhudmiry/upload";
 const amazonUrl =
   "https://amazon-web-scraping-api.p.rapidapi.com/products/search";

@@ -7,10 +7,10 @@ import { AuthProvider } from "@/context/AuthContext";
 import { PeopleProvider } from "@/context/PeopleContext";
 import { EventProvider } from "@/context/EventContext";
 
-export const metadata: Metadata = {
-  title: "Gifty",
-  description: "Get creative ideas for personalized gifts for your loved ones",
-};
+// export const metadata: Metadata = {
+//   title: "Gifty",
+//   description: "Get creative ideas for personalized gifts for your loved ones",
+// };
 
 export default function RootLayout(props: {
   children: React.ReactNode;
