@@ -180,7 +180,7 @@ export const generateQueries = async (event: Event, person: Person) => {
       ${
         person?.interests?.length === 1
           ? person.interests[0]
-          : person?.interests?.length > 1
+          : person?.interests?.length! > 1
           ? person?.interests?.join(",")
           : ""
       }`;
@@ -202,6 +202,7 @@ export const getProducts = async (query: string) => {
     `${amazonUrl}?criteria=${query}&page=1&countryCode=EG&languageCode=EN`,
     {
       method: "GET",
+      //@ts-ignore
       headers: {
         "X-RapidAPI-Key": rapidApiKey,
         "X-RapidAPI-Host": "amazon-web-scraping-api.p.rapidapi.com",
