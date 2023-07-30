@@ -1,5 +1,5 @@
 import { User } from "@/types/types";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 
 type authContextType = {
   user: User | null;
@@ -26,9 +26,12 @@ type Props = {
 };
 
 export function AuthProvider({ children }: Props) {
-  const currentUser = localStorage.getItem("user")
-    ? localStorage.getItem("user")
-    : null;
+  let currentUser;
+  useEffect(() => {
+    currentUser = localStorage.getItem("user")
+      ? localStorage.getItem("user")
+      : null;
+  }, []);
   let currentParsedUser = undefined;
   if (currentUser) currentParsedUser = JSON.parse(currentUser);
   const [user, setUser] = useState<User | null>(
