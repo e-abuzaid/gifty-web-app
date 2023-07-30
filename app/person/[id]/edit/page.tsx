@@ -148,6 +148,8 @@ const page = ({ params }: Props) => {
           <select
             className={inputVariants()}
             onChange={(e) =>
+              //@ts-ignore
+
               setFormData({ ...formData, relationship: e.target.value })
             }
             value={formData.relationship}
@@ -162,6 +164,8 @@ const page = ({ params }: Props) => {
           <select
             className={inputVariants()}
             onChange={(e) =>
+              //@ts-ignore
+
               setFormData({ ...formData, gender: e.target.value })
             }
             value={formData.gender}
@@ -230,6 +234,8 @@ const page = ({ params }: Props) => {
             onClick={() => {
               setFormData({
                 ...formData,
+                //@ts-ignore
+
                 interests: [...formData?.interests, interest],
               });
               setInterest("");

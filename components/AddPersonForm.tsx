@@ -95,6 +95,7 @@ const AddPersonForm = (props: Props) => {
         />
         <select
           className={inputVariants()}
+          //@ts-ignore
           onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
         >
           {genders.map((gender) => (
@@ -104,6 +105,7 @@ const AddPersonForm = (props: Props) => {
         <select
           className={inputVariants()}
           onChange={(e) =>
+            //@ts-ignore
             setFormData({ ...formData, relationship: e.target.value })
           }
         >
@@ -133,6 +135,8 @@ const AddPersonForm = (props: Props) => {
             onClick={() => {
               setFormData({
                 ...formData,
+                //@ts-ignore
+
                 interests: [...formData?.interests, interest],
               });
               setInterest("");
