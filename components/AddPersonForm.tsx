@@ -9,6 +9,7 @@ import { Button, buttonVariants } from "@/components/ui/Button";
 import { Input, inputVariants } from "@/components/ui/Input";
 import { genders, relationships } from "@/config";
 import { useAuth } from "@/context/AuthContext";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -29,6 +30,7 @@ const AddPersonForm = (props: Props) => {
   const [interest, setInterest] = useState("");
 
   const { user } = useAuth();
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -36,7 +38,6 @@ const AddPersonForm = (props: Props) => {
 
   const handlePhotoAdd = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoadingImg(true);
-    console.log(loadingImg);
     const reader = new FileReader();
     reader.onloadend = async () => {
       const url = await uploadImage(reader.result);
@@ -57,7 +58,7 @@ const AddPersonForm = (props: Props) => {
       setFormData({ ...formData, user: user?._id });
       const response = await createPerson(formData);
       if (response._id) {
-        console.log(response);
+        router.push(`/person/${response._id}`);
       }
     } catch (error) {
       console.log(error);

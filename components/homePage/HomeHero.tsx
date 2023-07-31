@@ -8,6 +8,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { buttonVariants } from "../ui/Button";
+import Loader from "../ui/Loader";
 
 type Props = {};
 
@@ -16,27 +17,33 @@ const HomeHero = (props: Props) => {
   const { events, setAllEvents } = useEvent();
   const [person, setPerson] = useState<Person | null>(null);
   const [title, setTitle] = useState("");
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const fetchEvents = async () => {
+      setLoading(true);
       if (user) {
         const currentEvents = await getEvents(user._id);
         setAllEvents(currentEvents);
       }
+      setLoading(false);
     };
     fetchEvents();
   }, []);
 
   useEffect(() => {
     const fetchPerson = async () => {
+      setLoading(true);
       if (events?.length && user) {
         const response = await getPerson(events[0].people[0], user._id);
         setPerson(response);
       }
+      setLoading(false);
     };
     fetchPerson();
   }, [events]);
 
   useEffect(() => {
+    setLoading(true);
     if (events?.length && person) {
       switch (events[0].name) {
         case "Anniversary":
@@ -53,10 +60,18 @@ const HomeHero = (props: Props) => {
           break;
       }
     }
+    setLoading(false);
   }, [events, person]);
 
+  if (events && events.length && !title)
+    return (
+      <div className="p-20 flex justify-center items-center md:h-[80vh] h-[50vh] w-full">
+        <Loader color="#875fb6" height={50} width={50} />
+      </div>
+    );
+
   if (!events) return null;
-  console.log(events);
+
   return (
     <div className="md:h-[80vh] h-[50vh] overflow-hidden">
       {events[0]?.picture && (

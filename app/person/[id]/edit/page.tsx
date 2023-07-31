@@ -101,7 +101,12 @@ const page = ({ params }: Props) => {
     }
   };
 
-  if (!person) return null;
+  if (!person)
+    return (
+      <div className="p-20 flex justify-center items-center h-[100vh] w-full">
+        <Loader color="#875fb6" height={50} width={50} />
+      </div>
+    );
 
   if (loading)
     return (

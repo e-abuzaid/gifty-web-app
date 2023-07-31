@@ -27,13 +27,15 @@ type Props = {
 
 export function AuthProvider({ children }: Props) {
   let currentUser;
+  let currentParsedUser: User | null = null;
+
   useEffect(() => {
     currentUser = localStorage.getItem("user")
       ? localStorage.getItem("user")
       : null;
+    if (currentUser) currentParsedUser = JSON.parse(currentUser);
+    setUser(currentParsedUser);
   }, []);
-  let currentParsedUser = undefined;
-  if (currentUser) currentParsedUser = JSON.parse(currentUser);
   const [user, setUser] = useState<User | null>(
     currentParsedUser ? currentParsedUser : null
   );

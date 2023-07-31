@@ -3,6 +3,7 @@
 import { getEvent, getPerson } from "@/api";
 import PersonGifts from "@/components/PersonGifts";
 import { Button } from "@/components/ui/Button";
+import Loader from "@/components/ui/Loader";
 import { useAuth } from "@/context/AuthContext";
 import { Event, Person } from "@/types/types";
 import { calculateTimeRemaining } from "@/utils";
@@ -84,7 +85,12 @@ const page = ({ params }: Props) => {
     }
   }, [event, people]);
 
-  if (!event || !people) return null;
+  if (!event || !people)
+    return (
+      <div className="p-20 flex justify-center items-center h-[100vh] w-full">
+        <Loader color="#875fb6" height={50} width={50} />
+      </div>
+    );
   console.log(event);
   console.log(people);
 

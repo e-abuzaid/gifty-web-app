@@ -133,8 +133,12 @@ const page = ({ params }: Props) => {
     }
   };
 
-  if (!event || !people) return null;
-  console.log(people);
+  if (!event || !people)
+    return (
+      <div className="p-20 flex justify-center items-center h-[100vh] w-full">
+        <Loader color="#875fb6" height={50} width={50} />
+      </div>
+    );
 
   if (loading)
     return (

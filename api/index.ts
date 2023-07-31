@@ -11,8 +11,10 @@ const baseUrl = "https://gifty-5tpp.onrender.com";
 const cloudinaryUrl = "https://api.cloudinary.com/v1_1/dhhudmiry/upload";
 const amazonUrl =
   "https://amazon-web-scraping-api.p.rapidapi.com/products/search";
-const rapidApiKey = process.env.RAPID_API_KEY;
+const rapidApiKey = "86f5af10d1msh808640d48e627cfp1a1aa7jsn81b95fad4722";
 const uploadPreset = process.env.UPLOAD_PRESET;
+
+console.log(rapidApiKey);
 
 export const uploadImage = async (image: string | ArrayBuffer | null) => {
   //   let base64Img = `data:image/jpg;base64,${image}`;
@@ -198,6 +200,8 @@ export const generateQueries = async (event: Event, person: Person) => {
 };
 
 export const getProducts = async (query: string) => {
+  console.log("rapid api key:", rapidApiKey);
+  console.log("rapid api key:", process.env.NEXT_PUBLIC_RAPID_API_KEY);
   const response = await fetch(
     `${amazonUrl}?criteria=${query}&page=1&countryCode=EG&languageCode=EN`,
     {

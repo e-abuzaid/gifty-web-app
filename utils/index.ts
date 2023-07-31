@@ -34,8 +34,6 @@ export const addAndSortByDate = (events: Event[]) => {
       }`;
       events[i].timeRemaining = days;
       events[i].timeRemainingInText = timeRemainingInText;
-      console.log(timeRemainingInText);
-      console.log(timeLeft);
     }
   }
   events.sort((a, b) => a.timeRemaining! - b.timeRemaining!);

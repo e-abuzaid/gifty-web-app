@@ -11,6 +11,7 @@ import { genders, relationships } from "@/config";
 import { useAuth } from "@/context/AuthContext";
 import { usePeople } from "@/context/PeopleContext";
 import Person from "./Person";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -28,6 +29,7 @@ const AddEventForm = (props: Props) => {
   const { people } = usePeople();
 
   const { user } = useAuth();
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,12 +44,10 @@ const AddEventForm = (props: Props) => {
     } else {
       setFormData({ ...formData, people: [...formData.people, id] });
     }
-    console.log(formData);
   };
 
   const handlePhotoAdd = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoadingImg(true);
-    console.log(loadingImg);
     const reader = new FileReader();
     reader.onloadend = async () => {
       const url = await uploadImage(reader.result);
@@ -76,7 +76,7 @@ const AddEventForm = (props: Props) => {
       }
       const response = await createEvent(formData);
       if (response._id) {
-        console.log(response);
+        router.push(`/event/${response._id}`);
       }
     } catch (error) {
       console.log(error);

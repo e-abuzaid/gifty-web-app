@@ -28,7 +28,9 @@ const ProductsContainer = (props: Props) => {
       {products.length ? (
         <Products products={products} />
       ) : (
-        <h1>You don't have any saved products</h1>
+        <h1 className="text-gray-500 md:text-lg m-2 font-semibold">
+          You don't have any saved products
+        </h1>
       )}
     </div>
   );

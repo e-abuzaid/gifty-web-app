@@ -4,6 +4,7 @@ import { useEvent } from "@/context/EventContext";
 import React from "react";
 import Event from "./Event";
 import Link from "next/link";
+import Loader from "./ui/Loader";
 
 type Props = {};
 
@@ -11,6 +12,13 @@ const Events = (props: Props) => {
   const { events } = useEvent();
 
   if (!events?.length) return null;
+
+  if (!events)
+    return (
+      <div className="p-20 flex justify-center items-center w-full">
+        <Loader color="#875fb6" height={50} width={50} />
+      </div>
+    );
   return (
     <div className="p-4">
       <h1 className="md:text-5xl text-3xl font-bold text-white">

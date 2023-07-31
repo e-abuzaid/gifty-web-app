@@ -1,6 +1,6 @@
 "use client";
 
-import React, { ReactEventHandler, useState } from "react";
+import React, { useState } from "react";
 import { Input } from "./ui/Input";
 import { Button, buttonVariants } from "./ui/Button";
 import { Icons } from "./icons";
@@ -8,6 +8,8 @@ import Image from "next/image";
 import { signup, uploadImage } from "@/api";
 import { MutatingDots } from "react-loader-spinner";
 import { SignupForm } from "@/types/types";
+import Loader from "./ui/Loader";
+import { useRouter } from "next/navigation";
 
 type Props = {};
 
@@ -23,6 +25,7 @@ const SignupForm = (props: Props) => {
   const [base64Url, setBase64Url] = useState<string | ArrayBuffer | null>("");
   const [loadingImg, setLoadingImg] = useState(false);
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -30,7 +33,6 @@ const SignupForm = (props: Props) => {
 
   const handlePhotoAdd = async (e: React.ChangeEvent<HTMLInputElement>) => {
     setLoadingImg(true);
-    console.log(loadingImg);
     const reader = new FileReader();
     reader.onloadend = async () => {
       const url = await uploadImage(reader.result);
@@ -49,7 +51,7 @@ const SignupForm = (props: Props) => {
     try {
       const response = await signup(formData);
       if (response._id) {
-        console.log(response);
+        router.push("/home");
       }
     } catch (error) {
       console.log(error);
@@ -104,15 +106,7 @@ const SignupForm = (props: Props) => {
           />
           <Button variant="primary" type="submit" className="w-60 m-2">
             {loading ? (
-              <MutatingDots
-                color="#22004b"
-                secondaryColor="#22004b"
-                height="100"
-                width="100"
-                radius="12.5"
-                ariaLabel="mutating-dots-loading"
-                visible={true}
-              />
+              <Loader color="#fff" secondaryColor="#ddd" />
             ) : (
               "Sign Up"
             )}

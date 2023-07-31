@@ -4,6 +4,7 @@ import { Event, Person } from "@/types/types";
 import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import Loader from "./ui/Loader";
 
 type Props = {
   id: string;
@@ -53,7 +54,12 @@ const Event = ({ id }: Props) => {
     }
   }, [event, person]);
 
-  if (!user || !event) return null;
+  if (!user || !event || !title)
+    return (
+      <div className="p-20 flex justify-center items-center h-[300px] md:min-w-[300px] min-w-[200px]">
+        <Loader color="#875fb6" height={50} width={50} />
+      </div>
+    );
   return (
     <Link
       href={`/event/${event._id}`}
